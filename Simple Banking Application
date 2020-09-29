@@ -1,0 +1,72 @@
+import java.util.Scanner;
+
+public class SimpleBankingApplication {
+
+    public static void main(String[] args) {
+
+        double balance = 0.0; //The balance of the user in $
+        String firstName = ""; //The first name of the user
+        String lastName = ""; //The last of the user
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Welcome to Bank");
+        System.out.println("What is your first name ?");
+        firstName = scanner.nextLine();
+        System.out.println("What is your last name ?");
+        lastName = scanner.nextLine();
+
+        String choice = "";
+
+        while (true) {
+            System.out.println("You can deposit/withdraw/send/see balance/exit");
+            System.out.println("What do you want to do ?");
+            choice = scanner.nextLine();
+
+
+            switch (choice.toLowerCase()) {
+                case "withdraw":
+                    System.out.println("How much do you wish to withdraw?");
+                    double amount = scanner.nextDouble();
+                    scanner.nextLine();
+                    if (balance >= amount) {
+                        System.out.println("Successfully withdrawn!");
+                        balance = balance - amount;
+                    } else {
+                        System.out.println("Insufficient funds");
+                    }
+                    break;
+                case "deposit":
+                    System.out.println("How much do you wish to deposit?");
+                    double depositedAmount = scanner.nextDouble();
+                    scanner.nextLine();
+                    System.out.println("Successfully deposited!");
+                    balance = balance + depositedAmount;
+
+                    break;
+                case "send":
+                    System.out.println("How much do you wish to send?");
+                    double sentAmount = scanner.nextDouble();
+                    scanner.nextLine();
+                    if (balance >= sentAmount) {
+                        System.out.println("Who do you want to send the money to ?");
+                        String beneficiaryName = scanner.nextLine();
+                        System.out.println("Successfully sent money to " + beneficiaryName + "!");
+                        balance = balance - sentAmount;
+                    } else {
+                        System.out.println("Insufficient funds");
+                    }
+                    break;
+                case "see balance":
+                    System.out.println("You have " + balance + "$");
+                    break;
+                case "exit":
+                    System.exit(0);
+                    break;
+            }
+        }
+
+    }
+
+
+}
